@@ -3,13 +3,43 @@
 
 /* global styles */
 
+html {
+  height: 100vh;
+}
+
 @view-transition { /* enable multi-page view transitions */
   navigation: auto;
 }
 
 body {
+  height: 100%;
   font-family: sans-serif;
   color: #100;
+}
+
+body.js {
+  article#chat {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  section#chatHistory {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    overflow-y: auto;
+  }
+
+  article.prompt:first-of-type {
+    margin-top: auto;
+  }
+}
+
+main {
+  height: 100%;
 }
 
 img {
@@ -19,23 +49,28 @@ img {
 section#chatHistory {
   padding-bottom: 15px;
 
-  article.prompt {
-    clear: both;
-    width: 50%;
-    float: right;
+  article.prompt,
+  article.response {
     background-color: #eee;
     padding: 15px;
+    max-width: 50%;
     border-radius: 15px;
     margin-bottom: 15px;
   }
 
-  progress {
-    margin-bottom: 15px;
+  article.prompt {
+    clear: both;
+    align-self: end; // should be on the right side of the screen
   }
 
   article.response {
     clear: both;
+    align-self: start; // should be on the left side of the screen
     text-align: left;
+  }
+
+  progress {
+    margin-bottom: 15px;
   }
 }
 

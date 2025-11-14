@@ -75,3 +75,16 @@ socketClient.onmessage = (event) => {
     document.getElementById('prompt')
   }
 }
+
+// maintain scroll at bottom on new content
+const chatHistory = document.getElementById('chatHistory')
+chatHistory.scrollTop = chatHistory.scrollHeight
+const callback = (mutationsList) => {
+  for (let mutation of mutationsList) {
+    if (mutation.type === 'childList') {
+      chatHistory.scrollTop = chatHistory.scrollHeight
+    }
+  }
+}
+const observer = new MutationObserver(callback)
+observer.observe(chatHistory, { childList: true })
