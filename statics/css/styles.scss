@@ -20,8 +20,6 @@ body {
 body.js {
   article#chat {
     height: 100%;
-    display: flex;
-    flex-direction: column;
     overflow: hidden;
   }
 
@@ -44,6 +42,16 @@ main {
 
 img {
   border: 5px #000 dotted;
+}
+
+article#chat {
+  display: flex;
+  flex-direction: column;
+}
+
+section#chatHistory {
+  display: flex;
+  flex-direction: column;
 }
 
 section#chatHistory {
