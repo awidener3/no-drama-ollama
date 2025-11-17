@@ -5,6 +5,7 @@
         <loop through="chatHistory" val="history">
           <article class="prompt">{history.rawPrompt}</article>
           <article class="response">{history.response|s}</article>
+          <article class="response">{history.thinking|s}</article>
         </loop>
       </section>
       <form action="/chat" method="post" class="semanticForms">
@@ -44,6 +45,7 @@
           </dl>
           <menu>
             <li><button type="submit" id="clearChatHistory" name="clearChatHistory" value="true">Clear chat history</button></li>
+            <li><button type="button" id="cancel" name="cancel" value="true">Cancel</button></li>
             <li><button type="submit" id="send" name="send" value="true">Send</button></li>
           </menu>
         </fieldset>

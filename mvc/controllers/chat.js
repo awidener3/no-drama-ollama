@@ -33,6 +33,7 @@ module.exports = (router, app) => {
 
       options.rawPrompt = rawPrompt
       options.response = markdownToHTML(response.message.content)
+      options.thinking = markdownToHTML(response.message.thinking)
       req.session.chatHistory.push(options)
       req.session.save()
     }
@@ -70,10 +71,12 @@ module.exports = (router, app) => {
             ws.send(JSON.stringify({ chunk: part.message.content }))
           }
         }
+
         ws.send(JSON.stringify({ done: true }))
 
         options.rawPrompt = rawPrompt
         options.response = fullResponse
+        options.thinking = fullThinking
         req.session.chatHistory.push(options)
         req.session.save()
       })

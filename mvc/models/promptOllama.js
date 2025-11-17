@@ -1,4 +1,5 @@
 module.exports = async (options) => {
+  console.log('prompt ollama...', options)
   const ollamaModule = await import('ollama')
   const ollama = ollamaModule.default
 

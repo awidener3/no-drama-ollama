@@ -41,7 +41,7 @@ async function sendPrompt (event) {
 
     // create new chat entry
     document.getElementById('chatHistory').insertAdjacentHTML('beforeend', `<article class="prompt">${document.getElementById('prompt').value}</article>`)
-    document.getElementById('chatHistory').insertAdjacentHTML('beforeend', '<article class="response"></article>')
+    document.getElementById('chatHistory').insertAdjacentHTML('beforeend', '<article class="response"><progress></progress></article>')
 
     // send to web socket server
     messageSoFar = ''
@@ -52,11 +52,6 @@ async function sendPrompt (event) {
 
     // clear the prompt
     document.getElementById('prompt').value = ''
-
-    // display loading bar
-    document.getElementById('chatHistory').insertAdjacentHTML('beforeend', '<progress></progress>')
-
-    // TODO: display a cancel response button; requires backend support for canceling an in-progress response
   }
 }
 
@@ -75,6 +70,12 @@ socketClient.onmessage = (event) => {
     document.getElementById('prompt')
   }
 }
+
+// handle cancel
+const cancelButton = document.getElementById('cancel')
+cancelButton.addEventListener('click', () => {
+  console.log('cancel...')
+})
 
 // maintain scroll at bottom on new content
 const chatHistory = document.getElementById('chatHistory')

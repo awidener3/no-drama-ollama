@@ -66,19 +66,34 @@ section#chatHistory {
     margin-bottom: 15px;
   }
 
+  // place prompts on the right side of the screen
   article.prompt {
     clear: both;
-    align-self: end; // should be on the right side of the screen
+    align-self: end;
   }
 
+  // place responses on the left side of the screen
   article.response {
-    clear: both;
-    align-self: start; // should be on the left side of the screen
+    position: relative;
+    align-self: start;
     text-align: left;
+
+    pre {
+      white-space: pre-wrap;
+    }
   }
 
-  progress {
-    margin-bottom: 15px;
+  // place the cancel button on the outer edge of responses
+  button#cancel {
+    cursor: pointer;
+    position: absolute;
+    width: 45px;
+    right: -55px;
+    bottom: 0;
+    background-color: #eee;
+    padding: 12px;
+    border: none;
+    border-radius: 15px;
   }
 }
 
