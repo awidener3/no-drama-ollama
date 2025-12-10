@@ -1,3 +1,8 @@
+## 0.1.4
+
+- Fixed a bug that caused package-lock.json not to be included in the npm package.
+- Updated dependencies.
+
 ## 0.1.3
 
 - Slimmed down the npm package some more.
