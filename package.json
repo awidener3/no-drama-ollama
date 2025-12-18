@@ -8,27 +8,42 @@
       "url": "https://github.com/rooseveltframework/no-drama-ollama/graphs/contributors"
     }
   ],
-  "version": "0.1.1",
+  "version": "0.1.5",
   "homepage": "https://github.com/rooseveltframework/no-drama-ollama",
   "license": "CC-BY-4.0",
   "main": "no-drama-ollama.js",
   "engines": {
     "node": ">=20.0.0"
   },
+  "files": [
+    ".gitattributes",
+    ".gitignore",
+    ".stylelintrc.json",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "default-llm-context",
+    "LICENSE.md",
+    "mvc",
+    "no-drama-ollama.js",
+    "package.json",
+    "README.md",
+    "rooseveltConfig.json",
+    "statics"
+  ],
   "dependencies": {
     "check-if-css-is-disabled": "2.0.2",
     "ollama": "0.6.3",
-    "roosevelt": "0.31.4",
-    "sass": "1.94.0",
-    "semantic-forms": "5.3.1",
+    "roosevelt": "0.31.7",
+    "sass": "1.97.0",
+    "semantic-forms": "5.3.4",
     "showdown": "2.1.0",
     "teddy": "1.1.4",
-    "webpack": "5.102.1"
+    "webpack": "5.104.0"
   },
   "devDependencies": {
     "nodemon": "3.1.11",
     "standard": "17.1.2",
-    "stylelint": "16.25.0",
+    "stylelint": "16.26.1",
     "stylelint-config-standard-scss": "16.0.0"
   },
   "nodemonConfig": {
