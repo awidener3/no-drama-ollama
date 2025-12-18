@@ -5,7 +5,10 @@
         <loop through="chatHistory" val="history">
           <article class="prompt">{history.rawPrompt}</article>
           <article class="response">{history.response|s}</article>
-          <article class="response">{history.thinking|s}</article>
+          <details class="thinking">
+            <summary>Show thinking</summary>
+            {history.thinking|s}
+          </details>
         </loop>
       </section>
       <form action="/chat" method="post" class="semanticForms">

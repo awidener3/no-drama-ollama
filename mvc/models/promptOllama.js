@@ -1,5 +1,4 @@
 module.exports = async (options) => {
-  console.log('prompt ollama...', options)
   const ollamaModule = await import('ollama')
   const ollama = ollamaModule.default
 
@@ -21,6 +20,8 @@ module.exports = async (options) => {
   } catch (error) {
     if (error.message === 'fetch failed') {
       return 'Ollama timed out on your chat prompt. This can happen on slower hardware. Consider increasing the timeout by setting the `OLLAMA_LOAD_TIMEOUT` environment variable to something long, e.g. 30m'
+    } else if (error.name === 'AbortError') {
+      return 'Request was aborted'
     } else {
       console.error(error)
       return 'Unknown Ollama error'

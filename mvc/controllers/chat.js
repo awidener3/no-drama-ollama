@@ -5,7 +5,16 @@ module.exports = (router, app) => {
   async function landingPage (req, res) {
     const model = await require('models/global')(req, res)
     model.content.pageTitle = 'AI chat'
-    if (req?.session?.chatHistory) model.chatHistory = req.session.chatHistory
+    if (req?.session?.chatHistory) {
+      model.chatHistory = req.session.chatHistory
+
+      for (const entry of model.chatHistory) {
+        entry.context = markdownToHTML(entry.context)
+        entry.response = markdownToHTML(entry.response)
+        entry.thinking = markdownToHTML(entry.thinking)
+      }
+    }
+
     res.render('chat', model)
   }
 

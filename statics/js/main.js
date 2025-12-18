@@ -81,11 +81,11 @@ cancelButton.addEventListener('click', () => {
 const chatHistory = document.getElementById('chatHistory')
 chatHistory.scrollTop = chatHistory.scrollHeight
 const callback = (mutationsList) => {
-  for (let mutation of mutationsList) {
+  for (const mutation of mutationsList) {
     if (mutation.type === 'childList') {
       chatHistory.scrollTop = chatHistory.scrollHeight
     }
   }
 }
-const observer = new MutationObserver(callback)
+const observer = new window.MutationObserver(callback)
 observer.observe(chatHistory, { childList: true })

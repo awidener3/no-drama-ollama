@@ -12,9 +12,37 @@ html {
 }
 
 body {
+  --noDramaBgColor: #fff;
+  --noDramaTextColor: #000;
+  --noDramaChatBubbleFontSize: 14px;
+  --noDramaChatBubbleBgColor: #eee;
+  --noDramaFontFamily: "Verdana", "Helvetica", "Arial", sans-serif;
+  --noDramaThinkingTextColor: #1e1e1e;
+
   height: 100%;
-  font-family: sans-serif;
-  color: #100;
+  font-family: var(--noDramaFontFamily);
+  box-sizing: border-box;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  background: var(--noDramaBgColor);
+  color: var(--noDramaTextColor);
+  color-scheme: light;
+}
+
+@mixin dark-mode {
+  --noDramaBgColor: #1f1f1f;
+  --noDramaTextColor: #fff;
+  --noDramaChatBubbleBgColor: #555;
+  --noDramaThinkingTextColor: #bababa;
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @include dark-mode;
+  }
 }
 
 body.js {
@@ -24,11 +52,21 @@ body.js {
   }
 
   section#chatHistory {
+    padding: 10px;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: start;
     overflow-y: auto;
+  }
+
+  form.semanticForms {
+    padding: 8px;
+    width: inherit;
+
+    fieldset {
+      margin-bottom: 0;
+    }
   }
 
   article.prompt:first-of-type {
@@ -59,11 +97,24 @@ section#chatHistory {
 
   article.prompt,
   article.response {
-    background-color: #eee;
+    background-color: var(--noDramaChatBubbleBgColor);
+    font-size: var(--noDramaChatBubbleFontSize);
     padding: 15px;
     max-width: 50%;
     border-radius: 15px;
     margin-bottom: 15px;
+  }
+
+  details.thinking {
+    font-size: 0.9rem;
+    max-width: 50%;
+    color: var(--noDramaThinkingTextColor);
+    font-style: italic;
+
+    summary {
+      cursor: pointer;
+      font-style: normal;
+    }
   }
 
   // place prompts on the right side of the screen
@@ -73,7 +124,8 @@ section#chatHistory {
   }
 
   // place responses on the left side of the screen
-  article.response {
+  article.response,
+  details.thinking {
     position: relative;
     align-self: start;
     text-align: left;
