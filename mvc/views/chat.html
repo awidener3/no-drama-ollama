@@ -42,9 +42,9 @@
               <div>
                 <dt><label for="thinking">Thinking</label></dt>
                 <dd>
-                  <select id="thinking" name="thinking">
+                  <select id="thinking" name="thinking" selected-value="{chatOptions.think}">
                     <option value="low">Low</option>
-                    <option value="medium" selected>Medium</option>
+                    <option value="medium">Medium</option>
                     <option value="High">High</option>
                   </select>
                 </dd>
@@ -52,7 +52,7 @@
               <div>
                 <dt><label for="model">Model</label></dt>
                 <dd>
-                  <select id="model" name="model">
+                  <select id="model" name="model" selected-value="{chatOptions.model}">
                     <loop through="models" val="model">
                       <option value="{model}">{model}</option>
                     </loop>
@@ -61,7 +61,7 @@
               </div>
               <div>
                 <dt><label for="showThinking">Show prompt thinking</label></dt>
-                <dd><input type="checkbox" name="showThinking" id="showThinking"></dd>
+                <dd><input type="checkbox" name="showThinking" id="showThinking" if-chatOptions.showThinking true="checked"></dd>
               </div>
             </dl>
             <menu>

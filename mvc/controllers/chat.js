@@ -15,6 +15,10 @@ module.exports = (router, app) => {
       }
     }
 
+    if (req?.session?.chatOptions) {
+      model.chatOptions = req.session.chatOptions
+    }
+
     res.render('chat', model)
   }
 
@@ -28,17 +32,20 @@ module.exports = (router, app) => {
 
     if (req.body.clearChatHistory === 'true') {
       req.session.chatHistory = []
+      req.session.chatOptions = {
+        think: 'medium',
+        showThinking: false
+      }
       req.session.save()
     } else if (req.body.send === 'true') {
       // non-js support
       if (!req?.session?.chatHistory) req.session.chatHistory = []
+      if (!req?.session?.chatOptions) req.session.chatOptions = {}
 
       req.body.context = app.get('ollama-context')
       const rawPrompt = req.body.prompt
       const options = preprocessPrompt(req.body, req.session.chatHistory)
-
       const response = await require('models/promptOllama')(options)
-      // TODO: make option to display thinking (response.message.thinking) in the gui
 
       options.rawPrompt = rawPrompt
       options.response = markdownToHTML(response.message.content)
@@ -57,6 +64,7 @@ module.exports = (router, app) => {
     // new client connected
     app.get('expressSession')(req, {}, () => {
       if (!req?.session?.chatHistory) req.session.chatHistory = []
+      if (!req?.session?.chatOptions) req.session.chatOptions = {}
 
       // message received from client
       ws.on('message', async (message) => {
@@ -66,6 +74,15 @@ module.exports = (router, app) => {
         const rawPrompt = message.prompt
         const options = preprocessPrompt(message, req.session.chatHistory)
         options.stream = true
+
+        // store chat options prior to prompt in case it is cancelled
+        req.session.chatOptions = {
+          think: message.thinking,
+          model: message.model,
+          showThinking: message?.showThinking === 'on' || false
+        }
+
+        req.session.save()
 
         const response = await require('models/promptOllama')(options)
         // TODO: make option to display thinking in the gui
