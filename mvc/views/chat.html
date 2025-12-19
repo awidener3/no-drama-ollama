@@ -7,50 +7,67 @@
           <article class="response">{history.response|s}</article>
           <details class="thinking">
             <summary>Show thinking</summary>
-            {history.thinking|s}
+            <section>{history.thinking|s}</section>
           </details>
         </loop>
       </section>
       <form action="/chat" method="post" class="semanticForms">
-        <fieldset class="colspan-2">
+        <fieldset>
           <legend>AI Chat</legend>
           <input type="hidden" name="_csrf" value="{csrfToken}">
           <dl>
             <div class="colspan-full">
               <dt><label for="prompt">Prompt</label></dt>
-              <dd><textarea name="prompt" id="prompt" data-auto-grow="true"></textarea></dd>
-            </div>
-            <!--! TODO: file attachment -->
-            <div hidden>
-              <dt hidden><label for="files">Files</label></dt>
-              <dd hidden><input type="file" id="files" name="files" multiple></dd>
-            </div>
-            <div>
-              <dt><label for="thinking">Thinking</label></dt>
               <dd>
-                <select id="thinking" name="thinking" data-max-content="true">
-                  <option value="low">Low</option>
-                  <option value="medium" selected>Medium</option>
-                  <option value="High">High</option>
-                </select>
-              </dd>
-            </div>
-            <div>
-              <dt><label for="model">Model</label></dt>
-              <dd class="align-end">
-                <select id="model" name="model" data-max-content="true">
-                  <loop through="models" val="model">
-                    <option value="{model}">{model}</option>
-                  </loop>
-                </select>
+                <textarea name="prompt" id="prompt" data-auto-grow="true"></textarea>
+                <button type="submit" id="send" name="send" value="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M3.3938 2.20468C3.70395 1.96828 4.12324 1.93374 4.4679 2.1162L21.4679 11.1162C21.7953 11.2895 22 11.6296 22 12C22 12.3704 21.7953 12.7105 21.4679 12.8838L4.4679 21.8838C4.12324 22.0662 3.70395 22.0317 3.3938 21.7953C3.08365 21.5589 2.93922 21.1637 3.02382 20.7831L4.97561 12L3.02382 3.21692C2.93922 2.83623 3.08365 2.44109 3.3938 2.20468ZM6.80218 13L5.44596 19.103L16.9739 13H6.80218ZM16.9739 11H6.80218L5.44596 4.89699L16.9739 11Z"
+                      fill="currentColor" />
+                  </svg>
+                </button>
               </dd>
             </div>
           </dl>
-          <menu>
-            <li><button type="submit" id="clearChatHistory" name="clearChatHistory" value="true">Clear chat history</button></li>
-            <li><button type="button" id="cancel" name="cancel" value="true">Cancel</button></li>
-            <li><button type="submit" id="send" name="send" value="true">Send</button></li>
-          </menu>
+
+          <details>
+            <summary>Options</summary>
+            <dl class="colspan-2">
+              <!--! TODO: file attachment -->
+              <div hidden>
+                <dt hidden><label for="files">Files</label></dt>
+                <dd hidden><input type="file" id="files" name="files" multiple></dd>
+              </div>
+              <div>
+                <dt><label for="thinking">Thinking</label></dt>
+                <dd>
+                  <select id="thinking" name="thinking">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="High">High</option>
+                  </select>
+                </dd>
+              </div>
+              <div>
+                <dt><label for="model">Model</label></dt>
+                <dd>
+                  <select id="model" name="model">
+                    <loop through="models" val="model">
+                      <option value="{model}">{model}</option>
+                    </loop>
+                  </select>
+                </dd>
+              </div>
+              <div>
+                <dt><label for="showThinking">Show prompt thinking</label></dt>
+                <dd><input type="checkbox" name="showThinking" id="showThinking"></dd>
+              </div>
+            </dl>
+            <menu>
+              <li><button type="submit" id="clearChatHistory" name="clearChatHistory" value="true" class="button-link">Clear chat history</button></li>
+            </menu>
+          </details>
         </fieldset>
       </form>
     </article>

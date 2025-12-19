@@ -72,12 +72,13 @@ module.exports = (router, app) => {
         let fullThinking = ''
         let fullResponse = ''
         for await (const part of response) {
-          if (part.message.thinking) {
+          if ('showThinking' in message && part.message.thinking) {
             fullThinking += part.message.thinking
+            ws.send(JSON.stringify({ type: 'thinking', chunk: part.message.thinking }))
           }
           if (part.message.content) {
             fullResponse += part.message.content
-            ws.send(JSON.stringify({ chunk: part.message.content }))
+            ws.send(JSON.stringify({ type: 'response', chunk: part.message.content }))
           }
         }
 
