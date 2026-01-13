@@ -56,6 +56,7 @@ module.exports = (router, app) => {
 
     model.content.pageTitle = 'AI chat'
     model.chatHistory = req.session.chatHistory
+    model.chatOptions = req.session.chatOptions
     res.render('chat', model)
   })
 

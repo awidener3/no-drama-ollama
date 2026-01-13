@@ -7,7 +7,9 @@
           <article class="response">{history.response|s}</article>
           <details class="thinking">
             <summary>Show thinking</summary>
-            <section>{history.thinking|s}</section>
+            <if chatOptions.showThinking>
+              <section>{history.thinking|s}</section>
+            </if>
           </details>
         </loop>
       </section>

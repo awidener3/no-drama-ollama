@@ -45,48 +45,28 @@ body {
   }
 }
 
-body.js {
-  article#chat {
-    height: 100%;
-    overflow: hidden;
+form.semanticForms {
+  padding: 8px;
+  width: inherit;
+
+  fieldset {
+    margin-bottom: 0;
   }
 
-  section#chatHistory {
-    padding: 10px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    overflow-y: auto;
+  dl div dd {
+    flex-direction: row;
   }
 
-  form.semanticForms {
-    padding: 8px;
-    width: inherit;
-
-    fieldset {
-      margin-bottom: 0;
-    }
-
-    dl div dd {
-      flex-direction: row;
-    }
-
-    textarea[name=prompt] ~ button.clear {
-      right: 60px;
-    }
-
-    button#send {
-      display: grid;
-      place-items: center;
-      padding: 0 10px;
-      height: var(--semanticFormsInputHeight);
-      align-self: end;
-    }
+  textarea[name=prompt] ~ button.clear {
+    right: 60px;
   }
 
-  article.prompt:first-of-type {
-    margin-top: auto;
+  button#send {
+    display: grid;
+    place-items: center;
+    padding: 0 10px;
+    height: var(--semanticFormsInputHeight);
+    align-self: end;
   }
 }
 
@@ -101,11 +81,17 @@ img {
 article#chat {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
 section#chatHistory {
   display: flex;
   flex-direction: column;
+  justify-content: start;
+  padding: 10px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 section#chatHistory {
@@ -122,6 +108,10 @@ section#chatHistory {
 
     p {
       margin: 0;
+    }
+
+    &:first-of-type {
+      margin-top: auto;
     }
   }
 

@@ -12,6 +12,8 @@ document.body.classList.replace('no-js', 'js')
 // semantic forms ui library js support https://github.com/kethinov/semanticforms
 require('semantic-forms')()
 
+// TODO: when a "show thinking" details is opened, it should remember its state across refreshes. It would be nice to update the chatHistory on the session, but we would need to find a way to do that from the client side
+
 const icons = {
   send: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.3938 2.20468C3.70395 1.96828 4.12324 1.93374 4.4679 2.1162L21.4679 11.1162C21.7953 11.2895 22 11.6296 22 12C22 12.3704 21.7953 12.7105 21.4679 12.8838L4.4679 21.8838C4.12324 22.0662 3.70395 22.0317 3.3938 21.7953C3.08365 21.5589 2.93922 21.1637 3.02382 20.7831L4.97561 12L3.02382 3.21692C2.93922 2.83623 3.08365 2.44109 3.3938 2.20468ZM6.80218 13L5.44596 19.103L16.9739 13H6.80218ZM16.9739 11H6.80218L5.44596 4.89699L16.9739 11Z" fill="currentColor"/></svg>',
   stop: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 8C4 5.79086 5.79086 4 8 4H16C18.2091 4 20 5.79086 20 8V16C20 18.2091 18.2091 20 16 20H8C5.79086 20 4 18.2091 4 16V8ZM8 6C6.89543 6 6 6.89543 6 8V16C6 17.1046 6.89543 18 8 18H16C17.1046 18 18 17.1046 18 16V8C18 6.89543 17.1046 6 16 6H8Z" fill="currentColor"/></svg>'
@@ -41,7 +43,11 @@ document.querySelector('form').addEventListener('submit', sendPrompt)
 async function abortPrompt (event) {
   // disable the button so that multiple abort requests are not sent
   event.target.disabled = true
+
+  // TODO: send an abort signal to ollama and stop any further responses
   console.log('abort...')
+
+  document.getElementsByTagName('progress')[0]?.remove()
 }
 
 // send prompt to llm over the web socket
