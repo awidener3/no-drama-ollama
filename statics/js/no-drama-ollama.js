@@ -52,7 +52,7 @@ async function abortPrompt (event) {
 
 // send prompt to llm over the web socket
 async function sendPrompt (event) {
-  if (event.target.id === 'prompt' || event.submitter.id === 'send' || !event?.submitter?.id === 'clearChatHistory') {
+  if (event.target.id === 'prompt' || event.submitter.id === 'send' || event?.submitter?.id !== 'clearChatHistory') {
     event?.preventDefault()
 
     const prompt = document.getElementById('prompt').value
@@ -80,6 +80,9 @@ async function sendPrompt (event) {
     const formData = Object.fromEntries(new FormData(document.querySelector('form')).entries())
     // TODO: convert `files` into a string-based data structure somehow
     formData.prompt = prompt
+
+    // TODO: gather state of details elements here to be passed along to the chat history
+
     socketClient.send(JSON.stringify(formData))
 
     // clear the prompt

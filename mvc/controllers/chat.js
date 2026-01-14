@@ -86,7 +86,7 @@ module.exports = (router, app) => {
         req.session.save()
 
         const response = await require('models/promptOllama')(options)
-        // TODO: make option to display thinking in the gui
+
         let fullThinking = ''
         let fullResponse = ''
         for await (const part of response) {
