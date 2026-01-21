@@ -74,14 +74,23 @@ async function sendPrompt (event) {
       document.getElementById('chatHistory').insertAdjacentHTML('beforeend', '<details class="thinking" open><summary>Show thinking</summary><section></section></details>')
     }
 
+    // retrieve current thinking details open state to be passed to the web socket
+    const thinkingOpenState = []
+    for (const el of document.querySelectorAll('.response')) {
+      if (el.nextElementSibling && el.nextElementSibling.classList.contains('thinking')) {
+        thinkingOpenState.push(el.nextElementSibling.open)
+      } else {
+        thinkingOpenState.push(false)
+      }
+    }
+
     // send to web socket server
     messageSoFar = ''
     thinkingSoFar = ''
     const formData = Object.fromEntries(new FormData(document.querySelector('form')).entries())
     // TODO: convert `files` into a string-based data structure somehow
     formData.prompt = prompt
-
-    // TODO: gather state of details elements here to be passed along to the chat history
+    formData.thinkingOpenState = thinkingOpenState
 
     socketClient.send(JSON.stringify(formData))
 

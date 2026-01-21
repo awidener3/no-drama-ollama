@@ -5,7 +5,7 @@
         <loop through="chatHistory" val="history">
           <article class="prompt">{history.rawPrompt}</article>
           <article class="response">{history.response|s}</article>
-          <details class="thinking" if-history.collapseThinking true="" false="open">
+          <details class="thinking" if-history.thinkingExpanded true="" false="open">
             <summary>Show thinking</summary>
             <if chatOptions.showThinking>
               <section>{history.thinking|s}</section>

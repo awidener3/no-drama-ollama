@@ -83,6 +83,10 @@ module.exports = (router, app) => {
           showThinking: message?.showThinking === 'on' || false
         }
 
+        req.session.chatHistory.forEach((chat, i) => {
+          chat.thinkingExpanded = message.thinkingOpenState[i]
+        })
+
         req.session.save()
 
         const response = await require('models/promptOllama')(options)
